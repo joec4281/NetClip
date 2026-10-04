@@ -5,7 +5,7 @@ This PowerShell 5.1 script will NOT completely work when run from PowerShell 5.1
 
 Specifically, it will fail when using the `Clip2Win` argument in PowerShell 5.1
 
-Take Command Console (TCC) uses the PShell command to execute PowerShell 5.1 commands, functions, and scripts (<span style="font-family: 'Courier New', monospace;">.ps1</span> files).
+Take Command Console (TCC) uses the PShell command to execute PowerShell 5.1 commands, functions, and scripts (``.ps1` files).
 
 TCC does this by creating its own in-process PowerShell session.
 
@@ -19,7 +19,7 @@ Unable to access the Windows clipboard.
 Run Windows PowerShell in an STA session.  
 ```
 
-The work-around is to callback into TCC from the <span style="font-family: 'Courier New', monospace;">NetClip.ps1</span> file using <span style="font-family: 'Courier New', monospace;">[TakeCommand.PowerShellHost]</span>
+The work-around is to callback into TCC from the `NetClip.ps1` file using `[TakeCommand.PowerShellHost]`
 
 ```
 function Copy-ToWindowsClipboard {
