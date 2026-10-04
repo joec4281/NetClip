@@ -3,7 +3,7 @@ PowerShell 5.1 script for working with https://clipb.in/ from Take Command Conso
 
 This PowerShell 5.1 script will NOT completely work when run from PowerShell 5.1 without modification.
 
-Specifically, it will fail when using the <span style="font-family: 'Courier New', monospace;">Clip2Win</span> argument in PowerShell 5.1
+Specifically, it will fail when using the `Clip2Win` argument in PowerShell 5.1
 
 Take Command Console (TCC) uses the PShell command to execute PowerShell 5.1 commands, functions, and scripts (<span style="font-family: 'Courier New', monospace;">.ps1</span> files).
 
