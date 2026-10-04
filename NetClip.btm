@@ -1,0 +1,7 @@
+@SETLOCAL
+@ECHO OFF
+if isdir r:\temp set temp=r:\temp
+
+pshell /s "u:\NetClip.ps1  %$"
+
+ENDLOCAL

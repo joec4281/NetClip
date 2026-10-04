@@ -386,6 +386,7 @@ begin {
         return [string] $response.Content
     }
 
+<#
     function Copy-ToWindowsClipboard {
         param(
             [Parameter(Mandatory = $true)]
@@ -402,6 +403,23 @@ begin {
             Write-Host 'Run Windows PowerShell in an STA session.'
         }
     }
+#>
+
+		function Copy-ToWindowsClipboard {
+				param(
+						[Parameter(Mandatory = $true)]
+						[string] $Text
+				)
+
+				try {
+						$tccCommand = 'clip /s clip0: $Text'
+						[void][TakeCommand.PowerShellHost]::InvokeCommand($tccCommand)
+				}
+				catch {
+						Write-Host 'Unable to access the Windows clipboard.'
+						Write-Host $_.Exception.Message
+				}
+		}
 
     function Show-ClipList {
         $items = @(Get-ActiveClips)

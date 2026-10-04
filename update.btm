@@ -1,0 +1,18 @@
+@SETLOCAL
+@ECHO OFF
+if isdir r:\temp set temp=r:\temp
+
+pushd
+
+cdd E:\Documents\GitHub\NetClip
+
+copy e:\utils\NetClip.ps1
+copy e:\utils\NetClip.btm
+
+git add .
+git commit -m "Misc. Updates"
+git push
+
+popd
+
+ENDLOCAL
