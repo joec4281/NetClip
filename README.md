@@ -1,5 +1,8 @@
 # NetClip
 PowerShell 5.1 script for working with https://clipb.in/ from Take Command Console v36
+  
+Please be aware that it's a work-in-progress,
+so there may still be some bugs.   
 
 `NetClip.btm` is a wrapper for `NetClip.ps1`,  
 making it easier to use `NetClip.ps1` from TCC v36.
