@@ -1,15 +1,40 @@
 @SETLOCAL
 @ECHO OFF
-COMMENT
-This is a wrapper for the NetClip.ps1 file.
 
-USAGE EXAMPLES:
+REM This is a wrapper for the NetClip.ps1 file.
 
+iff %1 eq help then
+  Gosub Help
+endiff
 
-ENDCOMMENT
+iff %# eq 0 then
+  Gosub Help
+else
+  if isdir r:\temp set temp=r:\temp
 
-if isdir r:\temp set temp=r:\temp
-
-pshell /s "u:\NetClip.ps1  %$"
+  pshell /s "u:\NetClip.ps1  %$"
+endiff
 
 ENDLOCAL
+quit
+
+:Help
+TEXT
+USAGE EXAMPLES:
+NetClip -FileIn 'r:\stuff.txt'
+
+NetClip -String 'The quick brown fox jumped over the lazy dog.'
+
+NetClip -List 
+
+NetClip -Retrieve 1
+
+** NOT WORKING ** NetClip -Retrieve 1 -Clip2Win
+use instead
+NetClip -Retrieve 1 > clip:
+
+** NOT WORKING ** NetClip -Clip2WinReference 1
+
+** NOT WORKING ** NetClip -Clip2WinReference 'https://clipb.in/J5ln7uP'
+ENDTEXT
+Return
