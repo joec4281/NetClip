@@ -1,5 +1,13 @@
 @SETLOCAL
 @ECHO OFF
+COMMENT
+This is a wrapper for the NetClip.ps1 file.
+
+USAGE EXAMPLES:
+
+
+ENDCOMMENT
+
 if isdir r:\temp set temp=r:\temp
 
 pshell /s "u:\NetClip.ps1  %$"
