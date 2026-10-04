@@ -9,13 +9,13 @@ making it easier to use `NetClip.ps1` from TCC v36.
 
 USAGE EXAMPLES for TCC v36;
 
-NetClip -FileIn 'r:\stuff.txt'
+`NetClip -FileIn 'r:\stuff.txt'`
 
-NetClip -String 'The quick brown fox jumped over the lazy dog.'
+`NetClip -String 'The quick brown fox jumped over the lazy dog.'`
 
-NetClip -List
+`NetClip -List`
 
-NetClip -Retrieve 1
+`NetClip -Retrieve 1`
 
-NetClip -Retrieve 1 > clip:
+`NetClip -Retrieve 1 > clip:`
   
