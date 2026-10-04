@@ -12,6 +12,7 @@ iff %# eq 0 then
 else
   if isdir r:\temp set temp=r:\temp
 
+  REM Change to reflect location of NetClip.ps1 on your system.
   pshell /s "u:\NetClip.ps1  %$"
 endiff
 
@@ -29,12 +30,6 @@ NetClip -List
 
 NetClip -Retrieve 1
 
-** NOT WORKING ** NetClip -Retrieve 1 -Clip2Win
-use instead
 NetClip -Retrieve 1 > clip:
-
-** NOT WORKING ** NetClip -Clip2WinReference 1
-
-** NOT WORKING ** NetClip -Clip2WinReference 'https://clipb.in/J5ln7uP'
 ENDTEXT
 Return

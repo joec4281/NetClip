@@ -1,11 +1,10 @@
 <#
 .SYNOPSIS
-    Stores, lists, retrieves, and copies public text clips using clipb.in.
+    Stores, lists, and retrieves public text clips using clipb.in.
 
 .DESCRIPTION
     NetClip.ps1 uploads text to clipb.in, maintains a local list of uploaded
-    clips, retrieves clips by URL or list number, and copies clip contents to
-    the Windows clipboard.
+    clips, and retrieves clip contents by URL or list number.
 
     The local index is stored at:
 
@@ -26,16 +25,8 @@
     Lists unexpired clips saved in the local NetClip index.
 
 .PARAMETER Retrieve
-    Retrieves a clip by its number in the -List output and displays its
-    contents on the console.
-
-.PARAMETER Clip2Win
-    When used with -Retrieve, copies the retrieved contents to the Windows
-    clipboard in addition to displaying them.
-
-.PARAMETER Clip2WinReference
-    Retrieves a clip by list number or URL and copies its contents to the
-    Windows clipboard without displaying them.
+    Retrieves a clip by its number in the -List output or by URL and writes
+    its contents to the console.
 
 .EXAMPLE
     .\NetClip.ps1 -FileIn 'r:\stuff.txt'
@@ -50,13 +41,10 @@
     .\NetClip.ps1 -Retrieve 1
 
 .EXAMPLE
-    .\NetClip.ps1 -Retrieve 1 -Clip2Win
+    .\NetClip.ps1 -Retrieve 1 | Set-Clipboard
 
 .EXAMPLE
-    .\NetClip.ps1 -Clip2WinReference 1
-
-.EXAMPLE
-    .\NetClip.ps1 -Clip2WinReference 'https://clipb.in/J5ln7uP'
+    .\NetClip.ps1 -Retrieve 'https://clipb.in/J5ln7uP' | Set-Clipboard
 
 .LINK
     https://clipb.in/api
@@ -101,21 +89,7 @@ param(
         Position = 0
     )]
     [ValidateNotNullOrEmpty()]
-    [string] $Retrieve,
-
-    [Parameter(
-        ParameterSetName = 'Retrieve',
-        Mandatory = $false
-    )]
-    [switch] $Clip2Win,
-
-    [Parameter(
-        ParameterSetName = 'Clip2WinReference',
-        Mandatory = $true,
-        Position = 0
-    )]
-    [ValidateNotNullOrEmpty()]
-    [string] $Clip2WinReference
+    [string] $Retrieve
 )
 
 begin {
@@ -386,41 +360,6 @@ begin {
         return [string] $response.Content
     }
 
-<#
-    function Copy-ToWindowsClipboard {
-        param(
-            [Parameter(Mandatory = $true)]
-            [string] $Text
-        )
-
-        Add-Type -AssemblyName System.Windows.Forms
-
-        try {
-            [System.Windows.Forms.Clipboard]::SetText($Text)
-        }
-        catch {
-            Write-Host 'Unable to access the Windows clipboard.'
-            Write-Host 'Run Windows PowerShell in an STA session.'
-        }
-    }
-#>
-
-		function Copy-ToWindowsClipboard {
-				param(
-						[Parameter(Mandatory = $true)]
-						[string] $Text
-				)
-
-				try {
-						$tccCommand = 'clip /s clip0: $Text'
-						[void][TakeCommand.PowerShellHost]::InvokeCommand($tccCommand)
-				}
-				catch {
-						Write-Host 'Unable to access the Windows clipboard.'
-						Write-Host $_.Exception.Message
-				}
-		}
-
     function Show-ClipList {
         $items = @(Get-ActiveClips)
 
@@ -509,21 +448,6 @@ process {
             }
 
             Write-Output $text
-
-            if ($Clip2Win) {
-                Copy-ToWindowsClipboard -Text $text
-
-            }
-        }
-
-        'Clip2WinReference' {
-            $text = Get-ClipText -Reference $Clip2WinReference
-
-            if ($null -eq $text) {
-                return
-            }
-
-            Copy-ToWindowsClipboard -Text $text
         }
     }
 }
