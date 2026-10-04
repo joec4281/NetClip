@@ -36,6 +36,7 @@ use...
 netclip -Retrieve 6 > clip:
 ```
 
+```
 function Copy-ToWindowsClipboard {
 		param(
 				[Parameter(Mandatory = $true)]
