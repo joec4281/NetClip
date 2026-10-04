@@ -22,7 +22,9 @@ Run Windows PowerShell in an STA session.
 The work-around is to callback into TCC from the `NetClip.ps1` file using `[TakeCommand.PowerShellHost]`
   
 NOTE: I'm still having issues with the callback,
-so the work-around for now is to re-direct output from the NetClip.btm to the Windows Clipboard. Example;
+so the work-around for now is to re-direct output from the `NetClip.btm` to the Windows Clipboard. 
+
+Example;
 
 Instead of;
 ```
@@ -34,6 +36,7 @@ use...
 netclip -Retrieve 6 > clip:
 ```
 
+```
 function Copy-ToWindowsClipboard {
 		param(
 				[Parameter(Mandatory = $true)]
