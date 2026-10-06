@@ -146,23 +146,24 @@ begin {
         return @($items)
     }
 
-    function Write-ClipIndex {
-        param(
-            [Parameter(Mandatory = $true)]
-            [object[]] $Items
-        )
+function Write-ClipIndex {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [object[]] $Items
+    )
 
-        Ensure-DataDirectory
+    Ensure-DataDirectory
 
-        $json = ConvertTo-Json `
-            -InputObject @($Items) `
-            -Depth 5
+    $json = ConvertTo-Json `
+        -InputObject @($Items) `
+        -Depth 5
 
-        Set-Content `
-            -LiteralPath $DataFile `
-            -Value $json `
-            -Encoding UTF8
-    }
+    Set-Content `
+        -LiteralPath $DataFile `
+        -Value $json `
+        -Encoding UTF8
+}
 
     function Convert-ToUtcDateTime {
         param(
