@@ -146,6 +146,23 @@ begin {
         return @($items)
     }
 
+<# Added 2026-10-06
+   Displays a friendly error message;
+
+	 PS E:\utils> netclip.ps1 -list
+	 No unexpired clips are saved.
+	 
+	 instead of;
+	 
+	 PS E:\utils> netclip.ps1 -list
+   e:\utils\NetClip.ps1 : Cannot bind argument to parameter 'Items' because it is an empty array.
+   At line:1 char:1
+   + netclip.ps1 -list
+   + ~~~~~~~~~~~~~~~~~
+       + CategoryInfo          : InvalidData: (:) [NetClip.ps1], ParameterBindingValidationException
+       + FullyQualifiedErrorId : ParameterArgumentValidationErrorEmptyArrayNotAllowed,NetClip.ps1
+#>
+
 function Write-ClipIndex {
     param(
         [Parameter(Mandatory = $true)]
